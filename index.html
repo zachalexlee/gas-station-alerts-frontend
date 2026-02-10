@@ -42,25 +42,6 @@
             font-size: 1.1em;
         }
 
-        .alert-banner {
-            background: #fef3c7;
-            border-left: 4px solid #f59e0b;
-            padding: 15px;
-            margin-top: 20px;
-            border-radius: 8px;
-        }
-
-        .alert-banner h3 {
-            color: #92400e;
-            margin-bottom: 8px;
-        }
-
-        .alert-banner p {
-            color: #78350f;
-            font-size: 0.95em;
-            line-height: 1.6;
-        }
-
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -86,13 +67,72 @@
             opacity: 0.9;
         }
 
+        .search-queries, .rss-feeds-section {
+            background: #f3f4f6;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-queries h3, .rss-feeds-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-icon {
+            font-size: 0.8em;
+            transition: transform 0.3s;
+        }
+
+        .toggle-icon.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        .collapsible-content {
+            max-height: 500px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible-content.collapsed {
+            max-height: 0;
+        }
+
+        .query-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 10px;
+        }
+
+        .query-item {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            color: #4b5563;
+            border: 1px solid #e5e7eb;
+        }
+
+        .rss-feed-item {
+            background: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            color: #6b7280;
+            border: 1px solid #e5e7eb;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+        }
+
         .feed-container {
             background: white;
             border-radius: 15px;
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            max-height: 700px;
-            overflow-y: auto;
         }
 
         .feed-header {
@@ -102,6 +142,8 @@
             margin-bottom: 20px;
             padding-bottom: 15px;
             border-bottom: 2px solid #eee;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .feed-title {
@@ -109,23 +151,72 @@
             color: #333;
         }
 
+        .filter-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .filter-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 0.9em;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .filter-input:focus {
+            border-color: #667eea;
+        }
+
+        .clear-filter-btn {
+            padding: 10px 15px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .clear-filter-btn:hover {
+            background: #dc2626;
+        }
+
+        .filter-stats {
+            font-size: 0.9em;
+            color: #6b7280;
+            margin-bottom: 15px;
+        }
+
         .live-indicator {
             display: flex;
             align-items: center;
             gap: 8px;
-            background: #10b981;
-            color: white;
             padding: 8px 15px;
             border-radius: 20px;
             font-size: 0.9em;
+            font-weight: 600;
         }
 
         .live-indicator.loading {
-            background: #6b7280;
+            background: #fbbf24;
+            color: #78350f;
         }
 
-        .live-indicator.error {
-            background: #ef4444;
+        .live-indicator.live {
+            background: #10b981;
+            color: white;
+        }
+
+        .live-indicator.waiting {
+            background: #94a3b8;
+            color: white;
         }
 
         .pulse {
@@ -148,6 +239,11 @@
             margin-bottom: 15px;
             border-radius: 8px;
             animation: slideIn 0.5s ease-out;
+            transition: opacity 0.3s;
+        }
+
+        .alert-item.filtered-out {
+            display: none;
         }
 
         @keyframes slideIn {
@@ -159,11 +255,6 @@
                 opacity: 1;
                 transform: translateY(0);
             }
-        }
-
-        .alert-item.new {
-            border-left-color: #10b981;
-            background: #ecfdf5;
         }
 
         .alert-header {
@@ -178,15 +269,6 @@
             font-weight: 600;
             color: #1f2937;
             flex: 1;
-        }
-
-        .alert-title a {
-            color: #1f2937;
-            text-decoration: none;
-        }
-
-        .alert-title a:hover {
-            color: #667eea;
         }
 
         .alert-time {
@@ -206,48 +288,6 @@
             color: #4b5563;
             font-size: 0.95em;
             line-height: 1.6;
-        }
-
-        .alert-tags {
-            display: flex;
-            gap: 8px;
-            margin-top: 10px;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            background: #e0e7ff;
-            color: #4c51bf;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.8em;
-        }
-
-        .search-queries {
-            background: #f3f4f6;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .search-queries h3 {
-            color: #333;
-            margin-bottom: 15px;
-        }
-
-        .query-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 10px;
-        }
-
-        .query-item {
-            background: white;
-            padding: 10px 15px;
-            border-radius: 6px;
-            font-size: 0.9em;
-            color: #4b5563;
-            border: 1px solid #e5e7eb;
         }
 
         .no-alerts {
@@ -281,51 +321,75 @@
             <h1>⛽ Gas Station & C-Store Opening Alerts</h1>
             <p class="subtitle">Real-time monitoring of new gas stations, convenience stores, and fuel centers</p>
 
-            <div class="alert-banner">
-                <h3>⚠️ Waiting for RSS Feeds</h3>
-                <p>Your newly created Google Alerts need 24-48 hours before Google generates RSS feeds for them. The backend server is running and ready to fetch data once the RSS feeds are available. Check README.md for instructions on adding the RSS feed URLs.</p>
-            </div>
-
             <div class="stats">
                 <div class="stat-card">
-                    <div class="stat-number" id="totalAlerts">34</div>
-                    <div class="stat-label">Active Alerts</div>
+                    <div class="stat-number" id="totalAlerts">29</div>
+                    <div class="stat-label">Active RSS Feeds</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number" id="todayCount">0</div>
-                    <div class="stat-label">From RSS Feeds</div>
+                    <div class="stat-label">Alerts Loaded</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number" id="backendStatus">🟢</div>
+                    <div class="stat-number" id="backendStatus">🟡</div>
                     <div class="stat-label">Server Status</div>
                 </div>
             </div>
         </header>
 
         <div class="search-queries">
-            <h3>🔍 Monitored Search Queries</h3>
-            <div class="query-grid">
-                <div class="query-item">"new gas station" "opening soon"</div>
-                <div class="query-item">"convenience store" "fuel pumps" "coming soon"</div>
-                <div class="query-item">"travel center" "new construction"</div>
-                <div class="query-item">"fuel station" "permit approved"</div>
-                <div class="query-item">"service station" "new development"</div>
-                <div class="query-item">"filling station" "coming soon"</div>
-                <div class="query-item">"c-store" "fuel" "new location"</div>
-                <div class="query-item">"truck stop" "new construction"</div>
-                <div class="query-item">"gas bar" "opening"</div>
-                <div class="query-item">"convenience mart" "gas pumps" "new"</div>
+            <h3 onclick="toggleSection('queries')">
+                <span class="toggle-icon" id="queries-icon">▼</span>
+                🔍 Gas Station Search Queries (10)
+            </h3>
+            <div class="collapsible-content" id="queries-content">
+                <div class="query-grid">
+                    <div class="query-item">"new gas station" "opening soon"</div>
+                    <div class="query-item">"convenience store" "fuel pumps" "coming soon"</div>
+                    <div class="query-item">"travel center" "new construction"</div>
+                    <div class="query-item">"fuel station" "permit approved"</div>
+                    <div class="query-item">"service station" "new development"</div>
+                    <div class="query-item">"filling station" "coming soon"</div>
+                    <div class="query-item">"c-store" "fuel" "new location"</div>
+                    <div class="query-item">"truck stop" "new construction"</div>
+                    <div class="query-item">"gas bar" "opening"</div>
+                    <div class="query-item">"convenience mart" "gas pumps" "new"</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rss-feeds-section">
+            <h3 onclick="toggleSection('rss')">
+                <span class="toggle-icon" id="rss-icon">▼</span>
+                📡 Active RSS Feeds (29) - Gas Stations Only
+            </h3>
+            <div class="collapsible-content" id="rss-content">
+                <div class="query-grid" id="rssFeedsList">
+                    <!-- Will be populated by JavaScript -->
+                </div>
             </div>
         </div>
 
         <div class="feed-container">
             <div class="feed-header">
                 <div class="feed-title">📰 Live Feed</div>
+                <div class="filter-container">
+                    <input
+                        type="text"
+                        class="filter-input"
+                        id="filterInput"
+                        placeholder="🔍 Filter alerts by keyword..."
+                        onkeyup="filterAlerts()"
+                    >
+                    <button class="clear-filter-btn" onclick="clearFilter()">✕</button>
+                </div>
                 <div class="live-indicator loading" id="liveIndicator">
                     <div class="pulse"></div>
                     <span id="statusText">CONNECTING</span>
                 </div>
             </div>
+
+            <div class="filter-stats" id="filterStats" style="display: none;"></div>
 
             <div id="alertsFeed">
                 <div class="no-alerts">
@@ -337,13 +401,100 @@
     </div>
 
     <script>
-        // Auto-detect backend URL - will be replaced during deployment
+        // Backend configuration
         const BACKEND_URL = window.location.hostname === 'localhost'
             ? 'http://localhost:3000'
             : 'https://gas-station-alerts-backend-1.onrender.com';
         const API_URL = `${BACKEND_URL}/api/feeds`;
+
+        // RSS Feed URLs - Gas Station Alerts Only
+        const RSS_FEEDS = [
+            'https://www.google.com/alerts/feeds/09182428279069180430/2356736684601183531',
+            'https://www.google.com/alerts/feeds/09182428279069180430/10272491932958314872',
+            'https://www.google.com/alerts/feeds/09182428279069180430/18098273169971572213',
+            'https://www.google.com/alerts/feeds/09182428279069180430/7464813959798405035',
+            'https://www.google.com/alerts/feeds/09182428279069180430/17182240907846120717',
+            'https://www.google.com/alerts/feeds/09182428279069180430/1226120987289009438',
+            'https://www.google.com/alerts/feeds/09182428279069180430/3328131774048131868',
+            'https://www.google.com/alerts/feeds/09182428279069180430/2641101500755475746',
+            'https://www.google.com/alerts/feeds/09182428279069180430/2665165367342573063',
+            'https://www.google.com/alerts/feeds/09182428279069180430/1856006892992916883',
+            'https://www.google.com/alerts/feeds/09182428279069180430/11760473391334443585',
+            'https://www.google.com/alerts/feeds/09182428279069180430/16754394224087368820',
+            'https://www.google.com/alerts/feeds/09182428279069180430/805090456831878584',
+            'https://www.google.com/alerts/feeds/09182428279069180430/2356736684601182860',
+            'https://www.google.com/alerts/feeds/09182428279069180430/11561908779301281246',
+            'https://www.google.com/alerts/feeds/09182428279069180430/2862118317250464279',
+            'https://www.google.com/alerts/feeds/09182428279069180430/7125003852991128726',
+            'https://www.google.com/alerts/feeds/09182428279069180430/8854767764924737815',
+            'https://www.google.com/alerts/feeds/09182428279069180430/2214701372282077850',
+            'https://www.google.com/alerts/feeds/09182428279069180430/15967401914306998170',
+            'https://www.google.com/alerts/feeds/09182428279069180430/18098273169971569420',
+            'https://www.google.com/alerts/feeds/09182428279069180430/6030688961984603201',
+            'https://www.google.com/alerts/feeds/09182428279069180430/13923193800938194260',
+            'https://www.google.com/alerts/feeds/09182428279069180430/10812523901845474331',
+            'https://www.google.com/alerts/feeds/09182428279069180430/17386860109803368591',
+            'https://www.google.com/alerts/feeds/09182428279069180430/14009841047842724740',
+            'https://www.google.com/alerts/feeds/09182428279069180430/3546512814188894202',
+            'https://www.google.com/alerts/feeds/09182428279069180430/805090456831878167',
+            'https://www.google.com/alerts/feeds/09182428279069180430/1226120987289009546'
+        ];
+
         let alertCount = 0;
         let lastFetchTime = null;
+        let allAlerts = [];
+
+        // Populate RSS feeds list
+        function populateRSSFeeds() {
+            const container = document.getElementById('rssFeedsList');
+            RSS_FEEDS.forEach((url, index) => {
+                const div = document.createElement('div');
+                div.className = 'rss-feed-item';
+                div.textContent = `${index + 1}. ${url}`;
+                container.appendChild(div);
+            });
+        }
+
+        // Toggle collapsible sections
+        function toggleSection(sectionId) {
+            const content = document.getElementById(`${sectionId}-content`);
+            const icon = document.getElementById(`${sectionId}-icon`);
+
+            content.classList.toggle('collapsed');
+            icon.classList.toggle('collapsed');
+        }
+
+        // Filter alerts
+        function filterAlerts() {
+            const filterValue = document.getElementById('filterInput').value.toLowerCase();
+            const alerts = document.querySelectorAll('.alert-item');
+            const filterStats = document.getElementById('filterStats');
+
+            let visibleCount = 0;
+
+            alerts.forEach(alert => {
+                const text = alert.textContent.toLowerCase();
+                if (text.includes(filterValue)) {
+                    alert.classList.remove('filtered-out');
+                    visibleCount++;
+                } else {
+                    alert.classList.add('filtered-out');
+                }
+            });
+
+            if (filterValue) {
+                filterStats.style.display = 'block';
+                filterStats.textContent = `Showing ${visibleCount} of ${alerts.length} alerts matching "${filterValue}"`;
+            } else {
+                filterStats.style.display = 'none';
+            }
+        }
+
+        // Clear filter
+        function clearFilter() {
+            document.getElementById('filterInput').value = '';
+            filterAlerts();
+        }
 
         function formatTime(dateString) {
             const date = new Date(dateString);
@@ -360,131 +511,99 @@
             const indicator = document.getElementById('liveIndicator');
             const statusText = document.getElementById('statusText');
 
-            indicator.className = 'live-indicator ' + status;
+            indicator.className = `live-indicator ${status}`;
             statusText.textContent = text;
-
-            // Update backend status emoji
-            const statusEmojis = {
-                '': '🟢',
-                'loading': '🟡',
-                'error': '🔴'
-            };
-            document.getElementById('backendStatus').textContent = statusEmojis[status] || '🟢';
         }
 
-        function addAlertToFeed(alert, isNew = false) {
+        function updateBackendStatus(status) {
+            const statusEl = document.getElementById('backendStatus');
+            if (status === 'online') {
+                statusEl.textContent = '🟢';
+            } else if (status === 'loading') {
+                statusEl.textContent = '🟡';
+            } else {
+                statusEl.textContent = '🔴';
+            }
+        }
+
+        function addAlertToFeed(alert) {
             const feed = document.getElementById('alertsFeed');
 
+            // Remove "no alerts" message
             const noAlerts = feed.querySelector('.no-alerts');
             if (noAlerts) {
                 noAlerts.remove();
             }
 
             const alertDiv = document.createElement('div');
-            alertDiv.className = isNew ? 'alert-item new' : 'alert-item';
+            alertDiv.className = 'alert-item';
             alertDiv.innerHTML = `
                 <div class="alert-header">
-                    <div class="alert-title">
-                        <a href="${alert.link}" target="_blank">${alert.title}</a>
-                    </div>
-                    <div class="alert-time">${formatTime(alert.pubDate)}</div>
+                    <div class="alert-title">${alert.title || 'Untitled Alert'}</div>
+                    <div class="alert-time">${formatTime(alert.pubDate || alert.isoDate || new Date())}</div>
                 </div>
-                <div class="alert-source">📰 ${alert.source}</div>
-                <div class="alert-snippet">${alert.content}</div>
-                <div class="alert-tags">
-                    <span class="tag">Google Alert</span>
-                    <span class="tag">RSS Feed</span>
-                </div>
+                <div class="alert-source">📰 ${alert.source || 'Google Alerts'}</div>
+                <div class="alert-snippet">${alert.contentSnippet || alert.content || 'No description available'}</div>
             `;
 
             feed.insertBefore(alertDiv, feed.firstChild);
-
-            if (isNew) {
-                setTimeout(() => {
-                    alertDiv.classList.remove('new');
-                }, 3000);
-            }
+            allAlerts.push(alert);
+            alertCount++;
+            document.getElementById('todayCount').textContent = alertCount;
         }
 
         async function fetchRSSFeeds() {
             try {
-                updateLiveIndicator('loading', 'FETCHING');
+                console.log('Fetching RSS feeds from:', API_URL);
+                updateLiveIndicator('loading', 'LOADING');
+                updateBackendStatus('loading');
 
                 const response = await fetch(API_URL);
 
                 if (!response.ok) {
-                    throw new Error('Failed to fetch feeds');
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
                 const data = await response.json();
+                console.log('Received data:', data);
 
                 if (data.success && data.items && data.items.length > 0) {
-                    // Clear existing alerts if this is the first fetch
-                    if (!lastFetchTime) {
-                        document.getElementById('alertsFeed').innerHTML = '';
-                    }
+                    updateLiveIndicator('live', 'LIVE');
+                    updateBackendStatus('online');
 
-                    // Add new items
                     data.items.forEach(item => {
-                        addAlertToFeed(item, false);
+                        addAlertToFeed(item);
                     });
 
-                    alertCount = data.count;
-                    document.getElementById('todayCount').textContent = alertCount;
-                    updateLiveIndicator('', 'LIVE');
                     lastFetchTime = new Date();
                 } else {
-                    // No items yet - show waiting message
-                    if (!lastFetchTime) {
-                        const feed = document.getElementById('alertsFeed');
-                        feed.innerHTML = `
-                            <div class="no-alerts">
-                                <p>✅ Connected to backend server</p>
-                                <p style="font-size: 0.9em; margin-top: 10px;">Waiting for RSS feed URLs to be added...</p>
-                                <p style="font-size: 0.85em; margin-top: 10px; color: #6b7280;">Check the README.md file in the backend folder for instructions.</p>
-                            </div>
-                        `;
-                    }
-                    updateLiveIndicator('loading', 'WAITING');
+                    updateLiveIndicator('waiting', 'WAITING');
+                    updateBackendStatus('online');
+                    console.log('No items in response');
                 }
             } catch (error) {
-                console.error('Error fetching feeds:', error);
-                updateLiveIndicator('error', 'ERROR');
+                console.error('Error fetching RSS feeds:', error);
+                updateLiveIndicator('waiting', 'ERROR');
+                updateBackendStatus('offline');
 
                 const feed = document.getElementById('alertsFeed');
-                if (!lastFetchTime) {
+                if (feed.children.length === 0) {
                     feed.innerHTML = `
                         <div class="no-alerts">
-                            <p>❌ Cannot connect to backend server</p>
-                            <p style="font-size: 0.9em; margin-top: 10px;">Make sure the Node.js server is running:</p>
-                            <p style="font-size: 0.85em; margin-top: 10px; color: #6b7280;">
-                                cd ~/Documents/gas-station-alerts-backend<br>
-                                npm start
-                            </p>
+                            <p>Could not connect to backend server</p>
+                            <p style="font-size: 0.9em; margin-top: 10px;">Error: ${error.message}</p>
                         </div>
                     `;
                 }
             }
         }
 
-        // Check server health
-        async function checkHealth() {
-            try {
-                const response = await fetch('http://localhost:3000/api/health');
-                if (response.ok) {
-                    console.log('✅ Backend server is healthy');
-                }
-            } catch (error) {
-                console.error('❌ Backend server health check failed');
-            }
-        }
-
-        // Initial fetch
+        // Initialize
         window.addEventListener('load', () => {
-            checkHealth();
+            populateRSSFeeds();
             fetchRSSFeeds();
 
-            // Fetch new data every 5 minutes
+            // Refresh every 5 minutes
             setInterval(fetchRSSFeeds, 5 * 60 * 1000);
         });
     </script>
