@@ -1498,7 +1498,13 @@
                 if (!response.ok) throw new Error('Failed to load categories');
 
                 const data = await response.json();
-                categories = data.categories || [];
+                // Convert categories object to array
+                const categoriesObj = data.categories || {};
+                categories = Object.keys(categoriesObj).map(id => ({
+                    id: id,
+                    name: categoriesObj[id].name,
+                    feeds: categoriesObj[id].feeds || []
+                }));
                 renderCategoryTabs();
             } catch (error) {
                 console.error('Error loading categories:', error);
