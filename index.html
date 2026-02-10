@@ -841,8 +841,8 @@
 
             const alertDiv = createAlertElement(alert);
 
-            // Insert at the top (newest first)
-            feed.insertBefore(alertDiv, feed.firstChild);
+            // Append to feed (backend already sorts newest first)
+            feed.appendChild(alertDiv);
             allAlerts.push(alert);
             alertCount++;
             document.getElementById('todayCount').textContent = alertCount;
